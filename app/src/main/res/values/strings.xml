@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">BitCoinMonitor</string>
+
+    <string name="Minute">Minuto</string>
+    <string name="Hour">Hora</string>
+
+    <string name="Notification">Notificação</string>
+    <string name="Notifications">Notificações</string>
+
+    <!--formulario add-->
+    <string name="Title">Nova Notificação</string>
+    <string name="TValue">Valor de trading:</string>
+    <string name="Condition">Condição:</string>
+        <string name="Condition1">Maior que</string>
+        <string name="Condition2">Menor que</string>
+    <string name="Provider">Provedor:</string>
+    <string name="verTime">Tempo de verificação:</string>
+    <string name="notType">Tipo de notificação:</string>
+        <string name="Simple">Notificação Simples</string>
+        <string name="Sound">Notificação Sonora</string>
+        <string name="Loud">Notificação Alta</string>
+        <string name="Ringer">Notificação Persistente</string>
+        <string name="formButton">Adicionar Notificação</string>
 </resources>
