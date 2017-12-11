@@ -4,6 +4,10 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import com.example.ragabuza.bitcoinmonitor.dao.AlarmDAO
+import com.example.ragabuza.bitcoinmonitor.model.Alarm
+import com.example.ragabuza.bitcoinmonitor.model.AlarmType
+import com.example.ragabuza.bitcoinmonitor.model.Condition
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -13,6 +17,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initSpinners()
+
+        btAdd.setOnClickListener{
+            val alarm: Alarm = Alarm(1, etValue.text.toString().toLong(), Condition.GREATER, "FoxBit", 30, AlarmType.LOUD)
+            val dao = AlarmDAO(this)
+            dao.add(alarm)
+            dao.close()
+
+            var alarms = dao.getAlarm()
+
+            alarms[1]
+        }
     }
 
     fun initSpinners(){
@@ -56,4 +71,6 @@ class MainActivity : AppCompatActivity() {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
     }
+
+
 }

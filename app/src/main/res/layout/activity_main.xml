@@ -36,6 +36,7 @@
         android:text="@string/TValue"
         android:layout_marginEnd="16dp"/>
     <EditText
+        android:id="@+id/etValue"
         android:layout_width="0dp"
         android:layout_weight="16"
         android:layout_height="wrap_content"
@@ -112,6 +113,7 @@
 
 
         <Button
+            android:id="@+id/btAdd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/formButton"
