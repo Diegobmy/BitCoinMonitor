@@ -17,6 +17,7 @@ import android.widget.ListView
 import android.widget.Toast
 import com.example.ragabuza.bitcoinmonitor.adapter.AlarmAdapter
 import com.example.ragabuza.bitcoinmonitor.dao.AlarmDAO
+import com.example.ragabuza.bitcoinmonitor.model.Alarm
 import kotlinx.android.synthetic.main.activity_list.*
 
 /**
@@ -24,21 +25,10 @@ import kotlinx.android.synthetic.main.activity_list.*
  */
 class ListActivity : AppCompatActivity() {
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
-
-//        lvAlarms.onItemClickListener = AdapterView.OnItemClickListener{
-//            Toast.makeText(this, )
-            //TODO delete
-//        }
-//        listaAlunos!!.onItemClickListener = AdapterView.OnItemClickListener { lista, item, position, id ->
-//            val aluno = listaAlunos!!.getItemAtPosition(position) as Aluno
-//
-//            val intentVaiProFormulario = Intent(this@ListaAlunosActivity, FormularioActivity::class.java)
-//            intentVaiProFormulario.putExtra("aluno", aluno)
-//            startActivity(intentVaiProFormulario)
-//        }
 
     }
 
@@ -46,9 +36,12 @@ class ListActivity : AppCompatActivity() {
         val dao = AlarmDAO(this)
         val alarms = dao.getAlarm()
         dao.close()
+        
+        val MutAlarms = alarms.toMutableList()
 
-        val adapter = AlarmAdapter(this, alarms)
+        val adapter = AlarmAdapter(this, MutAlarms)
         lvAlarms.adapter = adapter
+
     }
 
     override fun onResume() {

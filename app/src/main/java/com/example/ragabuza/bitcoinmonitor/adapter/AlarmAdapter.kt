@@ -6,14 +6,17 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import com.example.ragabuza.bitcoinmonitor.model.Alarm
 import android.view.LayoutInflater
+import android.widget.ImageButton
 import com.example.ragabuza.bitcoinmonitor.R
 import android.widget.TextView
+import com.example.ragabuza.bitcoinmonitor.ListActivity
+import com.example.ragabuza.bitcoinmonitor.dao.AlarmDAO
 
 
 /**
  * Created by diego on 11/12/2017.
  */
-class AlarmAdapter(var context: Context, var alarms: List<Alarm>) : BaseAdapter() {
+class AlarmAdapter(var context: Context, var alarms: MutableList<Alarm>) : BaseAdapter() {
 
     override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View? {
         var alarm = alarms[p0]
@@ -29,6 +32,15 @@ class AlarmAdapter(var context: Context, var alarms: List<Alarm>) : BaseAdapter(
 
         val fieldProvider = view?.findViewById<TextView>(R.id.tvProvider)
         fieldProvider?.text = alarm.provider
+
+        val buttonDelete = view?.findViewById<ImageButton>(R.id.btDelete)
+        buttonDelete?.setOnClickListener{
+            val dao = AlarmDAO(context)
+            dao.del(alarm)
+            dao.close()
+            alarms.remove(alarm)
+            this.notifyDataSetChanged()
+        }
 
         return view
     }
