@@ -16,7 +16,6 @@ class AlarmDAO(context: Context) : SQLiteOpenHelper(context, "Alarm", null, 1) {
                 "value INTEGER NOT NULL, " +
                 "condition INTEGER, " +
                 "provider TEXT, " +
-                "time INTEGER, " +
                 "type INTEGER);"
         db.execSQL(sql)
     }
@@ -45,7 +44,6 @@ class AlarmDAO(context: Context) : SQLiteOpenHelper(context, "Alarm", null, 1) {
         dados.put("value", alarm.value)
         dados.put("condition", alarm.condition.ordinal)
         dados.put("provider", alarm.provider)
-        dados.put("time", alarm.time)
         dados.put("type", alarm.type.ordinal)
 
         return dados
@@ -64,7 +62,6 @@ class AlarmDAO(context: Context) : SQLiteOpenHelper(context, "Alarm", null, 1) {
             c.getLong(c.getColumnIndex("value")),
             Condition.values()[c.getInt(c.getColumnIndex("condition"))],
             c.getString(c.getColumnIndex("provider")),
-            c.getInt(c.getColumnIndex("time")),
             AlarmType.values()[c.getInt(c.getColumnIndex("type"))])
 
             alarms.add(alarm)

@@ -5,7 +5,10 @@
     <string name="Hour">Hora</string>
 
     <string name="Notification">Notificação</string>
+
     <string name="Notifications">Notificações</string>
+    <string name="Add">Adicionar</string>
+    <string name="Config">Configurações</string>
 
     <!--formulario add-->
     <string name="Title">Nova Notificação</string>

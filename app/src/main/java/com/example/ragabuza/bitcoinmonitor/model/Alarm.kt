@@ -25,4 +25,4 @@ enum class AlarmTimes(val value: Int){
 }
 
 
-data class Alarm(val id: Long, val value: Long, val condition: Condition, val provider: String, val time: Int, val type: AlarmType)
+data class Alarm(val id: Long, val value: Long, val condition: Condition, val provider: String, val type: AlarmType)

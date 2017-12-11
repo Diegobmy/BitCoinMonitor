@@ -7,14 +7,15 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import com.example.ragabuza.bitcoinmonitor.dao.AlarmDAO
 import com.example.ragabuza.bitcoinmonitor.model.*
-import kotlinx.android.synthetic.main.activity_main.*
+import com.example.ragabuza.bitcoinmonitor.util.PrefManager
+import kotlinx.android.synthetic.main.activity_alarm.*
 
 
-class MainActivity : AppCompatActivity() {
+class AlarmActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_alarm)
         initSpinners()
 
         btAdd.setOnClickListener {
@@ -23,7 +24,6 @@ class MainActivity : AppCompatActivity() {
                     etValue.text.toString().toLong(),
                     Condition.values()[spCondition.selectedItemPosition],
                     Providers.values()[spProvider.selectedItemPosition].toString(),
-                    AlarmTimes.values()[spNotifyTimer.selectedItemPosition].value,
                     AlarmType.values()[spNotifyType.selectedItemPosition])
             val dao = AlarmDAO(this)
             dao.add(alarm)
@@ -32,6 +32,15 @@ class MainActivity : AppCompatActivity() {
 
         btNotifications.setOnClickListener {
             val intent = Intent(this, ListActivity::class.java)
+            startActivity(intent)
+        }
+
+        btTrends.setOnClickListener{
+            AlarmHelper(this).setAlarm()
+        }
+
+        btConfig.setOnClickListener {
+            val intent = Intent(this, ConfigActivity::class.java)
             startActivity(intent)
         }
     }
@@ -52,15 +61,6 @@ class MainActivity : AppCompatActivity() {
         providers.add(Providers.LOC.nome)
         providers.add(Providers.ARN.nome)
         initSpinner(spProvider, providers)
-
-        val notifyTimer = ArrayList<String>()
-        notifyTimer.add("15 "+getString(R.string.Minute)+"s")
-        notifyTimer.add("30 "+getString(R.string.Minute)+"s")
-        notifyTimer.add("1 "+getString(R.string.Hour))
-        notifyTimer.add("6 "+getString(R.string.Hour)+"s")
-        notifyTimer.add("12 "+getString(R.string.Hour)+"s")
-        notifyTimer.add("24 "+getString(R.string.Hour)+"s")
-        initSpinner(spNotifyTimer, notifyTimer)
 
         val notifyType = ArrayList<String>()
         notifyType.add(getString(R.string.Simple))
