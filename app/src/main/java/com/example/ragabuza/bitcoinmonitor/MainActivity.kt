@@ -5,9 +5,7 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import com.example.ragabuza.bitcoinmonitor.dao.AlarmDAO
-import com.example.ragabuza.bitcoinmonitor.model.Alarm
-import com.example.ragabuza.bitcoinmonitor.model.AlarmType
-import com.example.ragabuza.bitcoinmonitor.model.Condition
+import com.example.ragabuza.bitcoinmonitor.model.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -19,14 +17,17 @@ class MainActivity : AppCompatActivity() {
         initSpinners()
 
         btAdd.setOnClickListener{
-            val alarm: Alarm = Alarm(1, etValue.text.toString().toLong(), Condition.GREATER, "FoxBit", 30, AlarmType.LOUD)
+
+            val alarm: Alarm = Alarm(
+                    1,
+                    etValue.text.toString().toLong(),
+                    Condition.values()[spCondition.selectedItemPosition],
+                    Providers.values()[spProvider.selectedItemPosition].toString(),
+                    AlarmTimes.values()[spNotifyTimer.selectedItemPosition].value,
+                    AlarmType.values()[spNotifyType.selectedItemPosition])
             val dao = AlarmDAO(this)
             dao.add(alarm)
             dao.close()
-
-            var alarms = dao.getAlarm()
-
-            alarms[1]
         }
     }
 
@@ -37,14 +38,14 @@ class MainActivity : AppCompatActivity() {
         initSpinner(spCondition, condition)
 
         val providers = ArrayList<String>()
-        providers.add("FoxBit")
-        providers.add("Mercado Bitcoin")
-        providers.add("Negocie Coins")
-        providers.add("BitcoinToYou")
-        providers.add("BitcoinTrade")
-        providers.add("flowBTC")
-        providers.add("LocalBitcoins")
-        providers.add("Arena Bitcoin")
+        providers.add(Providers.FOX.nome)
+        providers.add(Providers.MBT.nome)
+        providers.add(Providers.NEG.nome)
+        providers.add(Providers.B2U.nome)
+        providers.add(Providers.BTD.nome)
+        providers.add(Providers.FLW.nome)
+        providers.add(Providers.LOC.nome)
+        providers.add(Providers.ARN.nome)
         initSpinner(spProvider, providers)
 
         val notifyTimer = ArrayList<String>()
