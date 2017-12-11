@@ -1,5 +1,6 @@
 package com.example.ragabuza.bitcoinmonitor
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -16,8 +17,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         initSpinners()
 
-        btAdd.setOnClickListener{
-
+        btAdd.setOnClickListener {
             val alarm: Alarm = Alarm(
                     1,
                     etValue.text.toString().toLong(),
@@ -28,6 +28,11 @@ class MainActivity : AppCompatActivity() {
             val dao = AlarmDAO(this)
             dao.add(alarm)
             dao.close()
+        }
+
+        btNotifications.setOnClickListener {
+            val intent = Intent(this, ListActivity::class.java)
+            startActivity(intent)
         }
     }
 
