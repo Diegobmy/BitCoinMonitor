@@ -18,6 +18,7 @@ import android.widget.Toast
 import com.example.ragabuza.bitcoinmonitor.adapter.AlarmAdapter
 import com.example.ragabuza.bitcoinmonitor.dao.AlarmDAO
 import com.example.ragabuza.bitcoinmonitor.model.Alarm
+import com.example.ragabuza.bitcoinmonitor.util.VibrationManager
 import kotlinx.android.synthetic.main.activity_list.*
 
 /**
@@ -30,13 +31,15 @@ class ListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
 
+        initFoot()
+
     }
 
     private fun loadList() {
         val dao = AlarmDAO(this)
         val alarms = dao.getAlarm()
         dao.close()
-        
+
         val MutAlarms = alarms.toMutableList()
 
         val adapter = AlarmAdapter(this, MutAlarms)
@@ -44,10 +47,31 @@ class ListActivity : AppCompatActivity() {
 
     }
 
+    override fun onBackPressed() {
+
+    }
+
     override fun onResume() {
         super.onResume()
         loadList()
+        VibrationManager(this).stopVibration()
     }
+    fun initFoot(){
+        btNew.setOnClickListener {
+            val intent = Intent(this, AlarmActivity::class.java)
+            startActivity(intent)
+        }
 
+        btConfig.setOnClickListener {
+            val intent = Intent(this, ConfigActivity::class.java)
+            startActivity(intent)
+        }
+
+        btTrends.setOnClickListener {
+            val intent = Intent(this, TrendsActivity::class.java)
+            startActivity(intent)
+        }
+
+    }
 
 }

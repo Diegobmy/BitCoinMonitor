@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import com.example.ragabuza.bitcoinmonitor.dao.AlarmDAO
+import com.example.ragabuza.bitcoinmonitor.util.AlarmHelper
 import com.example.ragabuza.bitcoinmonitor.util.PrefManager
 import kotlinx.android.synthetic.main.activity_config.*
 
@@ -16,6 +18,8 @@ class ConfigActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_config)
 
+
+        initFoot()
 
         tvNotifyTimer.setText(PrefManager(this).getTime().toString())
 
@@ -33,12 +37,37 @@ class ConfigActivity : AppCompatActivity() {
         if(PrefManager(this).getTimeFormat() == "Horas") spNotifyTimer.setSelection(1)
 
         btApply.setOnClickListener {
+            val dao = AlarmDAO(this)
+
             PrefManager(this).putTime(tvNotifyTimer.text.toString().toInt())
             PrefManager(this).putTimeFormat(spNotifyTimer.selectedItem.toString())
+
+            AlarmHelper(this).stopAlarm()
+            if(!dao.getAlarm().isEmpty()) AlarmHelper(this).setAlarm()
+
+            dao.close()
+
+            onBackPressed()
+        }
+
+        }
+
+    fun initFoot(){
+        btNotifications.setOnClickListener {
+            val intent = Intent(this, ListActivity::class.java)
+            startActivity(intent)
+        }
+
+        btNew.setOnClickListener {
             val intent = Intent(this, AlarmActivity::class.java)
             startActivity(intent)
         }
 
+        btTrends.setOnClickListener {
+            val intent = Intent(this, TrendsActivity::class.java)
+            startActivity(intent)
         }
+
+    }
 
     }

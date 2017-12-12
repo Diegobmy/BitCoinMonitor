@@ -7,15 +7,16 @@ import android.database.sqlite.SQLiteOpenHelper
 import com.example.ragabuza.bitcoinmonitor.model.Alarm
 import com.example.ragabuza.bitcoinmonitor.model.AlarmType
 import com.example.ragabuza.bitcoinmonitor.model.Condition
+import com.example.ragabuza.bitcoinmonitor.model.Providers
 import java.util.ArrayList
 
-class AlarmDAO(context: Context) : SQLiteOpenHelper(context, "Alarm", null, 1) {
+class AlarmDAO(context: Context?) : SQLiteOpenHelper(context, "Alarm", null, 1) {
 
     override fun onCreate(db: SQLiteDatabase) {
         val sql = "CREATE TABLE Alarm (id INTEGER PRIMARY KEY, " +
                 "value INTEGER NOT NULL, " +
                 "condition INTEGER, " +
-                "ProviderItem TEXT, " +
+                "provider INTEGER, " +
                 "type INTEGER);"
         db.execSQL(sql)
     }
@@ -43,7 +44,7 @@ class AlarmDAO(context: Context) : SQLiteOpenHelper(context, "Alarm", null, 1) {
         val dados = ContentValues()
         dados.put("value", alarm.value)
         dados.put("condition", alarm.condition.ordinal)
-        dados.put("ProviderItem", alarm.provider)
+        dados.put("provider", alarm.provider.ordinal)
         dados.put("type", alarm.type.ordinal)
 
         return dados
@@ -61,7 +62,7 @@ class AlarmDAO(context: Context) : SQLiteOpenHelper(context, "Alarm", null, 1) {
             c.getLong(c.getColumnIndex("id")),
             c.getLong(c.getColumnIndex("value")),
             Condition.values()[c.getInt(c.getColumnIndex("condition"))],
-            c.getString(c.getColumnIndex("ProviderItem")),
+            Providers.values()[c.getInt(c.getColumnIndex("provider"))],
             AlarmType.values()[c.getInt(c.getColumnIndex("type"))])
 
             alarms.add(alarm)

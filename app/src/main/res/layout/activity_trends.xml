@@ -3,11 +3,70 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <ListView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/lvAlarms"/>
+        android:padding="8dp"
+        android:orientation="vertical">
+    <TextView
+        android:drawableLeft="@drawable/ic_empty"
+        android:layout_marginBottom="12dp"
+        android:textSize="10pt"
+        android:id="@+id/FOX"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:drawableLeft="@drawable/ic_empty"
+        android:layout_marginBottom="12dp"
+        android:textSize="10pt"
+        android:id="@+id/MBT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:drawableLeft="@drawable/ic_empty"
+        android:layout_marginBottom="12dp"
+        android:textSize="10pt"
+        android:id="@+id/NEG"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:drawableLeft="@drawable/ic_empty"
+        android:layout_marginBottom="12dp"
+        android:textSize="10pt"
+        android:id="@+id/B2U"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:drawableLeft="@drawable/ic_empty"
+        android:layout_marginBottom="12dp"
+        android:textSize="10pt"
+        android:id="@+id/BTD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:drawableLeft="@drawable/ic_empty"
+        android:layout_marginBottom="12dp"
+        android:textSize="10pt"
+        android:id="@+id/FLW"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:drawableLeft="@drawable/ic_empty"
+        android:layout_marginBottom="12dp"
+        android:textSize="10pt"
+        android:id="@+id/LOC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:drawableLeft="@drawable/ic_empty"
+        android:layout_marginBottom="12dp"
+        android:textSize="10pt"
+        android:id="@+id/ARN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,8 +81,8 @@
             android:layout_height="wrap_content"
             android:text="Trends"
             android:textSize="5pt"
-            android:textColor="@android:color/white"
-            android:drawableTint="@android:color/white"
+            android:textColor="@color/colorPrimaryDarker"
+            android:drawableTint="@color/colorPrimaryDarker"
             android:drawableTop="@drawable/ic_trending_up"
             android:background="@null"/>
         <View
@@ -38,8 +97,8 @@
             android:layout_height="wrap_content"
             android:text="@string/Notifications"
             android:textSize="5pt"
-            android:textColor="@color/colorPrimaryDarker"
-            android:drawableTint="@color/colorPrimaryDarker"
+            android:textColor="@android:color/white"
+            android:drawableTint="@android:color/white"
             android:drawableTop="@drawable/ic_format_list_bulleted"
             android:background="@null"/>
         <View

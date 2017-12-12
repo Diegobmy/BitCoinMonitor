@@ -1,6 +1,8 @@
 package com.example.ragabuza.bitcoinmonitor.adapter
 
 import android.content.Context
+import android.content.Intent
+import android.support.v4.content.ContextCompat.startActivity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
@@ -9,6 +11,8 @@ import android.view.LayoutInflater
 import android.widget.ImageButton
 import com.example.ragabuza.bitcoinmonitor.R
 import android.widget.TextView
+import com.example.ragabuza.bitcoinmonitor.AlarmActivity
+import com.example.ragabuza.bitcoinmonitor.AlarmReceiver
 import com.example.ragabuza.bitcoinmonitor.ListActivity
 import com.example.ragabuza.bitcoinmonitor.dao.AlarmDAO
 
@@ -16,10 +20,10 @@ import com.example.ragabuza.bitcoinmonitor.dao.AlarmDAO
 /**
  * Created by diego on 11/12/2017.
  */
-class AlarmAdapter(var context: Context, var alarms: MutableList<Alarm>) : BaseAdapter() {
+class AlarmAdapter(val context: Context, val alarms: MutableList<Alarm>) : BaseAdapter() {
 
     override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View? {
-        var alarm = alarms[p0]
+        val alarm: Alarm = alarms[p0]
 
         val inflater = LayoutInflater.from(context)
         var view = p1
@@ -31,7 +35,7 @@ class AlarmAdapter(var context: Context, var alarms: MutableList<Alarm>) : BaseA
         fieldValue?.text = alarm.value.toString()
 
         val fieldProvider = view?.findViewById<TextView>(R.id.tvProvider)
-        fieldProvider?.text = alarm.provider
+        fieldProvider?.text = alarm.provider.nome
 
         val buttonDelete = view?.findViewById<ImageButton>(R.id.btDelete)
         buttonDelete?.setOnClickListener{
@@ -41,6 +45,14 @@ class AlarmAdapter(var context: Context, var alarms: MutableList<Alarm>) : BaseA
             alarms.remove(alarm)
             this.notifyDataSetChanged()
         }
+
+        val buttonEdit = view?.findViewById<ImageButton>(R.id.btEdit)
+        buttonEdit?.setOnClickListener{
+            val intent = Intent(context, AlarmActivity::class.java)
+            intent.putExtra("alarm", alarm)
+            context.startActivity(intent)
+        }
+
 
         return view
     }

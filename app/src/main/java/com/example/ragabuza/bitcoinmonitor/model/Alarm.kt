@@ -1,5 +1,7 @@
 package com.example.ragabuza.bitcoinmonitor.model
 
+import java.io.Serializable
+
 /**
  * Created by diego on 10/12/2017.
  */
@@ -25,4 +27,4 @@ enum class AlarmTimes(val value: Int){
 }
 
 
-data class Alarm(val id: Long, val value: Long, val condition: Condition, val provider: String, val type: AlarmType)
+data class Alarm(val id: Long, val value: Long, val condition: Condition, val provider: Providers, val type: AlarmType) : Serializable

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 <LinearLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -60,5 +61,72 @@
 </LinearLayout>
 </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="6dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:gravity="center_vertical">
+        <Button
+            android:id="@+id/btTrends"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Trends"
+            android:textSize="5pt"
+            android:textColor="@android:color/white"
+            android:drawableTint="@android:color/white"
+            android:drawableTop="@drawable/ic_trending_up"
+            android:background="@null"/>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark"
+            />
+        <Button
+            android:id="@+id/btNotifications"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/Notifications"
+            android:textSize="5pt"
+            android:textColor="@android:color/white"
+            android:drawableTint="@android:color/white"
+            android:drawableTop="@drawable/ic_format_list_bulleted"
+            android:background="@null"/>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark"
+            />
+        <Button
+            android:id="@+id/btNew"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/Add"
+            android:textSize="5pt"
+            android:textColor="@android:color/white"
+            android:drawableTint="@android:color/white"
+            android:drawableTop="@drawable/ic_add"
+            android:background="@null"/>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark"
+            />
+        <Button
+            android:id="@+id/btConfig"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/Config"
+            android:textSize="5pt"
+            android:textColor="@color/colorPrimaryDarker"
+            android:drawableTint="@color/colorPrimaryDarker"
+            android:drawableTop="@drawable/ic_settings"
+            android:background="@null"/>
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

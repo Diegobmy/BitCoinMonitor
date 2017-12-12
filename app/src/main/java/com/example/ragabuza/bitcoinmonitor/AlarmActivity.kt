@@ -8,11 +8,10 @@ import android.widget.Spinner
 import android.widget.Toast
 import com.example.ragabuza.bitcoinmonitor.dao.AlarmDAO
 import com.example.ragabuza.bitcoinmonitor.model.*
-import com.github.kittinunf.fuel.core.ResponseDeserializable
+import com.example.ragabuza.bitcoinmonitor.util.AlarmHelper
 import com.github.kittinunf.fuel.httpGet
-import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_alarm.*
-import kotlinx.android.synthetic.main.list_item.*
+import kotlinx.android.synthetic.main.activity_config.*
 
 
 class AlarmActivity : AppCompatActivity() {
@@ -22,32 +21,18 @@ class AlarmActivity : AppCompatActivity() {
         setContentView(R.layout.activity_alarm)
         initSpinners()
 
+        val editAlarm: Alarm? = intent.getSerializableExtra("alarm") as Alarm?
+
+        if(editAlarm != null){
+            fill(editAlarm)
+        }
+
         btAdd.setOnClickListener {
-            val alarm: Alarm = Alarm(
-                    1,
-                    etValue.text.toString().toLong(),
-                    Condition.values()[spCondition.selectedItemPosition],
-                    Providers.values()[spProvider.selectedItemPosition].toString(),
-                    AlarmType.values()[spNotifyType.selectedItemPosition])
-            val dao = AlarmDAO(this)
-            dao.add(alarm)
-            dao.close()
+            setOrUpdateAlarm(editAlarm)
         }
-
-        btNotifications.setOnClickListener {
-            val intent = Intent(this, ListActivity::class.java)
-            startActivity(intent)
+        btCancel.setOnClickListener {
+            onBackPressed()
         }
-
-        btTrends.setOnClickListener{
-            AlarmHelper(this).setAlarm()
-        }
-
-        btConfig.setOnClickListener {
-            val intent = Intent(this, ConfigActivity::class.java)
-            startActivity(intent)
-        }
-
 
         btPutValue.setOnClickListener {
             var providerValue: Float? = 0f
@@ -73,21 +58,6 @@ class AlarmActivity : AppCompatActivity() {
 
     }
 
-    data class ProvidersList(val FOX: ProviderItem,
-                             val MBT: ProviderItem,
-                             val NEG: ProviderItem,
-                             val B2U: ProviderItem,
-                             val BTD: ProviderItem,
-                             val FLW: ProviderItem,
-                             val LOC: ProviderItem,
-                             val ARN: ProviderItem){
-
-        class Deserializer: ResponseDeserializable<ProvidersList>{
-            override fun deserialize(content: String): ProvidersList? = Gson().fromJson(content, ProvidersList::class.java)
-        }
-    }
-    data class ProviderItem(val ask: Float)
-
     fun initSpinners(){
         val condition = ArrayList<String>()
         condition.add(getString(R.string.Condition1))
@@ -109,7 +79,7 @@ class AlarmActivity : AppCompatActivity() {
         notifyType.add(getString(R.string.Simple))
         notifyType.add(getString(R.string.Sound))
         notifyType.add(getString(R.string.Loud))
-        notifyType.add(getString(R.string.Ringer))
+//        notifyType.add(getString(R.string.Ringer))
         initSpinner(spNotifyType, notifyType)
     }
 
@@ -119,6 +89,37 @@ class AlarmActivity : AppCompatActivity() {
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
+    }
+
+    fun fill(alarm: Alarm){
+        etValue.setText(alarm.value.toString())
+        spCondition.setSelection(alarm.condition.ordinal)
+        spProvider.setSelection(alarm.provider.ordinal)
+        spNotifyType.setSelection(alarm.type.ordinal)
+        tvTitle.text = "Editar Notificação"
+        btAdd.text = "Editar Notificação"
+    }
+
+    fun setOrUpdateAlarm(eAlarm: Alarm?){
+
+        val id = if (eAlarm == null) 1 else eAlarm.id
+
+        val dao = AlarmDAO(this)
+        if(dao.getAlarm().isEmpty()) AlarmHelper(this).setAlarm()
+        val alarm: Alarm = Alarm(
+                id,
+                etValue.text.toString().toLong(),
+                Condition.values()[spCondition.selectedItemPosition],
+                Providers.values()[spProvider.selectedItemPosition],
+                AlarmType.values()[spNotifyType.selectedItemPosition])
+
+        if (eAlarm == null) dao.add(alarm) else dao.alt(alarm)
+
+        dao.close()
+
+        val intent = Intent(this, ListActivity::class.java)
+        startActivity(intent)
+
     }
 
 
