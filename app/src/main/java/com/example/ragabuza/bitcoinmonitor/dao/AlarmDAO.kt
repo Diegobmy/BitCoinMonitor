@@ -15,7 +15,7 @@ class AlarmDAO(context: Context) : SQLiteOpenHelper(context, "Alarm", null, 1) {
         val sql = "CREATE TABLE Alarm (id INTEGER PRIMARY KEY, " +
                 "value INTEGER NOT NULL, " +
                 "condition INTEGER, " +
-                "provider TEXT, " +
+                "ProviderItem TEXT, " +
                 "type INTEGER);"
         db.execSQL(sql)
     }
@@ -43,7 +43,7 @@ class AlarmDAO(context: Context) : SQLiteOpenHelper(context, "Alarm", null, 1) {
         val dados = ContentValues()
         dados.put("value", alarm.value)
         dados.put("condition", alarm.condition.ordinal)
-        dados.put("provider", alarm.provider)
+        dados.put("ProviderItem", alarm.provider)
         dados.put("type", alarm.type.ordinal)
 
         return dados
@@ -61,7 +61,7 @@ class AlarmDAO(context: Context) : SQLiteOpenHelper(context, "Alarm", null, 1) {
             c.getLong(c.getColumnIndex("id")),
             c.getLong(c.getColumnIndex("value")),
             Condition.values()[c.getInt(c.getColumnIndex("condition"))],
-            c.getString(c.getColumnIndex("provider")),
+            c.getString(c.getColumnIndex("ProviderItem")),
             AlarmType.values()[c.getInt(c.getColumnIndex("type"))])
 
             alarms.add(alarm)

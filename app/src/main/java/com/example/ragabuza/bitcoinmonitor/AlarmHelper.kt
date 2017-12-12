@@ -20,7 +20,7 @@ class AlarmHelper(private val context: Context) {
 
     fun setAlarm(){
         val time = PrefManager(context).getTime().toLong() * 1000 * 60 * if(PrefManager(context).getTimeFormat() == "Horas") 60 else 1
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), time, pendingIntent)
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + time, time, pendingIntent)
         Toast.makeText(context, "setted", Toast.LENGTH_LONG).show()
     }
 
