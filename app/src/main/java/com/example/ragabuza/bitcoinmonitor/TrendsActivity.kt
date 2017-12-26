@@ -9,10 +9,12 @@ import com.example.ragabuza.bitcoinmonitor.model.Providers
 import com.example.ragabuza.bitcoinmonitor.model.ProvidersList
 import com.github.kittinunf.fuel.httpGet
 import kotlinx.android.synthetic.main.activity_trends.*
-import android.graphics.drawable.Drawable
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.StyleSpan
+import android.app.ProgressDialog
+import android.opengl.Visibility
+import android.view.View.GONE
 
 
 /**
@@ -22,7 +24,14 @@ class TrendsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_trends)
+        this.supportActionBar!!.title = "Trends"
         initFoot()
+
+        val progress = ProgressDialog(this)
+        progress.setTitle("Carregando")
+        progress.setMessage("Carregando dados.")
+        progress.setCancelable(false)
+        progress.show()
 
         val dao = AlarmDAO(this)
         val alarms = dao.getAlarm()
@@ -31,33 +40,43 @@ class TrendsActivity : AppCompatActivity() {
 
         "https://api.bitvalor.com/v1/order_book_stats.json".httpGet().responseObject(ProvidersList.Deserializer()) { request, response, result ->
             val (providersResult, err) = result
+
+            if (providersResult?.FOX?.ask == null) FOX.visibility = GONE
             var spannable = SpannableString(Providers.FOX.nome + ":\n R$ "+providersResult?.FOX?.ask)
             spannable.setSpan( StyleSpan(Typeface.BOLD),0,Providers.FOX.nome.length+1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
             FOX.text = spannable
 
+            if (providersResult?.MBT?.ask == null) MBT.visibility = GONE
             spannable = SpannableString(Providers.MBT.nome + ":\n R$ "+providersResult?.MBT?.ask)
             spannable.setSpan( StyleSpan(Typeface.BOLD),0,Providers.MBT.nome.length+1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
             MBT.text = spannable
 
+            if (providersResult?.NEG?.ask == null) NEG.visibility = GONE
             spannable = SpannableString(Providers.NEG.nome + ":\n R$ "+providersResult?.NEG?.ask)
             spannable.setSpan( StyleSpan(Typeface.BOLD),0,Providers.NEG.nome.length+1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
             NEG.text = spannable
 
+            if (providersResult?.B2U?.ask == null) B2U.visibility = GONE
             spannable = SpannableString(Providers.B2U.nome + ":\n R$ "+providersResult?.B2U?.ask)
             spannable.setSpan( StyleSpan(Typeface.BOLD),0,Providers.B2U.nome.length+1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
             B2U.text = spannable
 
+            if (providersResult?.BTD?.ask == null) BTD.visibility = GONE
             spannable = SpannableString(Providers.BTD.nome + ":\n R$ "+providersResult?.BTD?.ask)
             spannable.setSpan( StyleSpan(Typeface.BOLD),0,Providers.BTD.nome.length+1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
             BTD.text = spannable
 
+            if (providersResult?.FLW?.ask == null) FLW.visibility = GONE
             spannable = SpannableString(Providers.FLW.nome + ":\n R$ "+providersResult?.FLW?.ask)
             spannable.setSpan( StyleSpan(Typeface.BOLD),0,Providers.FLW.nome.length+1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
             FLW.text = spannable
 
+            if (providersResult?.ARN?.ask == null) ARN.visibility = GONE
             spannable = SpannableString(Providers.ARN.nome + ":\n R$ "+providersResult?.ARN?.ask)
             spannable.setSpan( StyleSpan(Typeface.BOLD),0,Providers.ARN.nome.length+1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
             ARN.text = spannable
+
+            progress.dismiss()
         }
 
         val img = this.getResources().getDrawable(R.drawable.ic_alarm)

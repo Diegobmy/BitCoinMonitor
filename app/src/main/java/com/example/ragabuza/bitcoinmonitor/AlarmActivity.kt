@@ -1,5 +1,6 @@
 package com.example.ragabuza.bitcoinmonitor
 
+
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -11,7 +12,7 @@ import com.example.ragabuza.bitcoinmonitor.model.*
 import com.example.ragabuza.bitcoinmonitor.util.AlarmHelper
 import com.github.kittinunf.fuel.httpGet
 import kotlinx.android.synthetic.main.activity_alarm.*
-import kotlinx.android.synthetic.main.activity_config.*
+
 
 
 class AlarmActivity : AppCompatActivity() {
@@ -19,6 +20,7 @@ class AlarmActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_alarm)
+        this.supportActionBar!!.title = "Nova notificação"
         initSpinners()
 
         val editAlarm: Alarm? = intent.getSerializableExtra("alarm") as Alarm?
@@ -45,12 +47,14 @@ class AlarmActivity : AppCompatActivity() {
                     3 -> providerValue = providersResult?.B2U?.ask
                     4 -> providerValue = providersResult?.BTD?.ask
                     5 -> providerValue = providersResult?.FLW?.ask
-                    6 -> providerValue = providersResult?.LOC?.ask
-                    7 -> providerValue = providersResult?.ARN?.ask
+                    6 -> providerValue = providersResult?.ARN?.ask
                 }
-                Toast.makeText(this, providerValue.toString(), Toast.LENGTH_LONG).show()
 
-                etValue.setText(providerValue.toString())
+                var text = providerValue.toString().split(".")
+
+                Toast.makeText(this, text[0], Toast.LENGTH_LONG).show()
+
+                etValue.setText(text[0])
 
             }
         }
@@ -71,7 +75,6 @@ class AlarmActivity : AppCompatActivity() {
         providers.add(Providers.B2U.nome)
         providers.add(Providers.BTD.nome)
         providers.add(Providers.FLW.nome)
-        providers.add(Providers.LOC.nome)
         providers.add(Providers.ARN.nome)
         initSpinner(spProvider, providers)
 
@@ -96,11 +99,27 @@ class AlarmActivity : AppCompatActivity() {
         spCondition.setSelection(alarm.condition.ordinal)
         spProvider.setSelection(alarm.provider.ordinal)
         spNotifyType.setSelection(alarm.type.ordinal)
-        tvTitle.text = "Editar Notificação"
-        btAdd.text = "Editar Notificação"
+        this.supportActionBar!!.title = "Editar notificação"
+        btAdd.text = "Salvar"
     }
 
     fun setOrUpdateAlarm(eAlarm: Alarm?){
+
+        if (etValue.text.toString().isEmpty()) {
+            Toast.makeText(this, "Valor de trading vazio.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        if (!etValue.text.toString().matches("-?\\d+(\\.\\d+)?".toRegex())) {
+            Toast.makeText(this, "Valor de trading não numérico.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        if (etValue.text.toString().toLong() > 999999) {
+            Toast.makeText(this, "Valor de trading muito alto.", Toast.LENGTH_LONG).show()
+            return
+        }
+
 
         val id = if (eAlarm == null) 1 else eAlarm.id
 

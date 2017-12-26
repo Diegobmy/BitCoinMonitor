@@ -17,7 +17,7 @@ class ConfigActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_config)
-
+        this.supportActionBar!!.title = "Configurações"
 
         initFoot()
 

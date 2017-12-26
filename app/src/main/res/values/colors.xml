@@ -4,7 +4,8 @@
     <color name="colorPrimaryDark">#FFA000</color>
     <color name="colorPrimaryDarker">#884000</color>
     <color name="darkGrey">#333333</color>
-    <color name="colorAccent">#8BC34A</color>
+    <color name="colorNegative">#AA0000</color>
+    <color name="colorAccent">#44401a</color>
     <!--<color name="colorPrimary">#3FB551</color>-->
     <!--<color name="colorPrimaryDark">#309F3F</color>-->
     <!--<color name="colorPrimaryDarker">#005000</color>-->

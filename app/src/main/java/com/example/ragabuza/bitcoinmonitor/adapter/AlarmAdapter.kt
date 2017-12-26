@@ -1,5 +1,6 @@
 package com.example.ragabuza.bitcoinmonitor.adapter
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.support.v4.content.ContextCompat.startActivity
@@ -9,12 +10,18 @@ import android.widget.BaseAdapter
 import com.example.ragabuza.bitcoinmonitor.model.Alarm
 import android.view.LayoutInflater
 import android.widget.ImageButton
+import android.widget.ImageView
 import com.example.ragabuza.bitcoinmonitor.R
 import android.widget.TextView
 import com.example.ragabuza.bitcoinmonitor.AlarmActivity
 import com.example.ragabuza.bitcoinmonitor.AlarmReceiver
 import com.example.ragabuza.bitcoinmonitor.ListActivity
 import com.example.ragabuza.bitcoinmonitor.dao.AlarmDAO
+import com.example.ragabuza.bitcoinmonitor.model.Condition
+import android.widget.Toast
+import android.content.DialogInterface
+
+
 
 
 /**
@@ -38,12 +45,19 @@ class AlarmAdapter(val context: Context, val alarms: MutableList<Alarm>) : BaseA
         fieldProvider?.text = alarm.provider.nome
 
         val buttonDelete = view?.findViewById<ImageButton>(R.id.btDelete)
-        buttonDelete?.setOnClickListener{
-            val dao = AlarmDAO(context)
-            dao.del(alarm)
-            dao.close()
-            alarms.remove(alarm)
-            this.notifyDataSetChanged()
+            buttonDelete?.setOnClickListener{
+            AlertDialog.Builder(context)
+                .setTitle("Confirmar exclusão")
+                .setMessage("Você realmente quer excluir este alarme?")
+                .setPositiveButton("Sim", DialogInterface.OnClickListener {
+                    dialog, whichButton ->
+                    val dao = AlarmDAO(context)
+                    dao.del(alarm)
+                    dao.close()
+                    alarms.remove(alarm)
+                    this.notifyDataSetChanged()
+                })
+                .setNegativeButton("Cancelar", null).show()
         }
 
         val buttonEdit = view?.findViewById<ImageButton>(R.id.btEdit)
@@ -52,6 +66,12 @@ class AlarmAdapter(val context: Context, val alarms: MutableList<Alarm>) : BaseA
             intent.putExtra("alarm", alarm)
             context.startActivity(intent)
         }
+
+        val icon = view?.findViewById<ImageView>(R.id.ivArrow)
+        icon?.setImageResource(if (alarm.condition == Condition.GREATER)
+            R.drawable.ic_keyboard_arrow_up
+        else
+            R.drawable.ic_keyboard_arrow_down)
 
 
         return view
