@@ -32,18 +32,10 @@ class ConfigActivity : AppCompatActivity() {
 
         initFoot()
 
-        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713")
-        mAdView = findViewById(R.id.adView)
+        mAdView = findViewById(R.id.adViewConfig)
         val adRequest = AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .build()
         mAdView.loadAd(adRequest)
-
-        mAdView.adListener = object: AdListener() {
-            override fun onAdFailedToLoad(errorCode : Int) {
-                Toast.makeText(this@ConfigActivity, errorCode.toString(), Toast.LENGTH_LONG).show()
-            }
-        }
 
         tvNotifyTimer.setText(PrefManager(this).getTime().toString())
 

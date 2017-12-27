@@ -12,11 +12,16 @@ import com.example.ragabuza.bitcoinmonitor.dao.AlarmDAO
 import com.example.ragabuza.bitcoinmonitor.model.*
 import com.example.ragabuza.bitcoinmonitor.util.AlarmHelper
 import com.github.kittinunf.fuel.httpGet
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.activity_alarm.*
 
 
 
 class AlarmActivity : AppCompatActivity() {
+
+    lateinit var mAdView : AdView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +31,12 @@ class AlarmActivity : AppCompatActivity() {
         this.supportActionBar?.setDisplayHomeAsUpEnabled(true)
         this.supportActionBar?.setHomeAsUpIndicator(R.drawable.bitcoin_clock)
         initSpinners()
+
+        MobileAds.initialize(this, getString(R.string.pub_app))
+        mAdView = findViewById(R.id.adViewAlarm)
+        val adRequest = AdRequest.Builder()
+                .build()
+        mAdView.loadAd(adRequest)
 
         val editAlarm: Alarm? = intent.getSerializableExtra("alarm") as Alarm?
 

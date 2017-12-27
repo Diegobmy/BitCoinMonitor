@@ -1,4 +1,9 @@
 <resources>
+
+    <string name="pub_app">ca-app-pub-3914566327746823~3262581101</string>
+    <string name="pub_bloco">ca-app-pub-3940256099942544/6300978111</string>
+    <!--<string name="pub_bloco">ca-app-pub-3914566327746823/2564453396</string>-->
+
     <string name="app_name">Alarme Bitcoin</string>
 
     <string name="Minute">Minuto</string>

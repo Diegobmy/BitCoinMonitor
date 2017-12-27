@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity
 import com.example.ragabuza.bitcoinmonitor.adapter.AlarmAdapter
 import com.example.ragabuza.bitcoinmonitor.dao.AlarmDAO
 import com.example.ragabuza.bitcoinmonitor.util.VibrationManager
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
 import kotlinx.android.synthetic.main.activity_list.*
 
 /**
@@ -13,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_list.*
  */
 class ListActivity : AppCompatActivity() {
 
+    lateinit var mAdView : AdView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +25,11 @@ class ListActivity : AppCompatActivity() {
         this.supportActionBar?.setDisplayHomeAsUpEnabled(true)
         this.supportActionBar?.setHomeAsUpIndicator(R.drawable.bitcoin_clock)
         initFoot()
+
+        mAdView = findViewById(R.id.adViewList)
+        val adRequest = AdRequest.Builder()
+                .build()
+        mAdView.loadAd(adRequest)
 
     }
 

@@ -35,6 +35,13 @@ class TrendsActivity : AppCompatActivity() {
         this.supportActionBar?.setHomeAsUpIndicator(R.drawable.bitcoin_clock)
         initFoot()
 
+        MobileAds.initialize(this, getString(R.string.pub_app))
+        mAdView = findViewById(R.id.adViewTrends)
+        val adRequest = AdRequest.Builder()
+                .build()
+        mAdView.loadAd(adRequest)
+
+
         val progress = ProgressDialog(this)
         progress.setTitle("Carregando")
         progress.setMessage("Carregando dados.")
