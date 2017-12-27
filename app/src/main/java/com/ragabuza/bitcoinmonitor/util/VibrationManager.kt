@@ -1,11 +1,7 @@
-package com.example.ragabuza.bitcoinmonitor.util
+package com.ragabuza.bitcoinmonitor.util
 
-import android.app.AlertDialog
 import android.content.Context
 import android.os.Vibrator
-import android.content.DialogInterface
-
-
 
 
 /**

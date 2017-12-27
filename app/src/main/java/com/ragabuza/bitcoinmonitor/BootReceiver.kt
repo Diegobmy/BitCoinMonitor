@@ -1,9 +1,9 @@
-package com.example.ragabuza.bitcoinmonitor
+package com.ragabuza.bitcoinmonitor
 
 import android.content.Intent
 import android.content.BroadcastReceiver
 import android.content.Context
-import com.example.ragabuza.bitcoinmonitor.util.AlarmHelper
+import com.ragabuza.bitcoinmonitor.util.AlarmHelper
 
 
 /**

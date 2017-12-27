@@ -1,13 +1,13 @@
-package com.example.ragabuza.bitcoinmonitor.dao
+package com.ragabuza.bitcoinmonitor.dao
 
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import com.example.ragabuza.bitcoinmonitor.model.Alarm
-import com.example.ragabuza.bitcoinmonitor.model.AlarmType
-import com.example.ragabuza.bitcoinmonitor.model.Condition
-import com.example.ragabuza.bitcoinmonitor.model.Providers
+import com.ragabuza.bitcoinmonitor.model.Alarm
+import com.ragabuza.bitcoinmonitor.model.AlarmType
+import com.ragabuza.bitcoinmonitor.model.Condition
+import com.ragabuza.bitcoinmonitor.model.Providers
 import java.util.ArrayList
 
 class AlarmDAO(context: Context?) : SQLiteOpenHelper(context, "Alarm", null, 1) {

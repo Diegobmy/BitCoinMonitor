@@ -1,4 +1,4 @@
-package com.example.ragabuza.bitcoinmonitor
+package com.ragabuza.bitcoinmonitor
 
 
 import android.app.ProgressDialog
@@ -8,9 +8,9 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
-import com.example.ragabuza.bitcoinmonitor.dao.AlarmDAO
-import com.example.ragabuza.bitcoinmonitor.model.*
-import com.example.ragabuza.bitcoinmonitor.util.AlarmHelper
+import com.ragabuza.bitcoinmonitor.dao.AlarmDAO
+import com.ragabuza.bitcoinmonitor.model.*
+import com.ragabuza.bitcoinmonitor.util.AlarmHelper
 import com.github.kittinunf.fuel.httpGet
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
@@ -32,7 +32,6 @@ class AlarmActivity : AppCompatActivity() {
         this.supportActionBar?.setHomeAsUpIndicator(R.drawable.bitcoin_clock)
         initSpinners()
 
-        MobileAds.initialize(this, getString(R.string.pub_app))
         mAdView = findViewById(R.id.adViewAlarm)
         val adRequest = AdRequest.Builder()
                 .build()
@@ -70,11 +69,11 @@ class AlarmActivity : AppCompatActivity() {
                     6 -> providerValue = providersResult?.ARN?.ask
                 }
 
-                var text = providerValue.toString().split(".")
+                var text = providerValue.toString()
 
-                Toast.makeText(this, text[0], Toast.LENGTH_LONG).show()
+                Toast.makeText(this, text, Toast.LENGTH_LONG).show()
 
-                etValue.setText(text[0])
+                etValue.setText(text)
                 progress.dismiss()
             }
         }
@@ -104,6 +103,8 @@ class AlarmActivity : AppCompatActivity() {
         notifyType.add(getString(R.string.Loud))
 //        notifyType.add(getString(R.string.Ringer))
         initSpinner(spNotifyType, notifyType)
+
+        spNotifyType.setSelection(2)
     }
 
     fun initSpinner(spinner: Spinner, list: ArrayList<String>){

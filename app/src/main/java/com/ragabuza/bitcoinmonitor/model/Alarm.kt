@@ -1,4 +1,4 @@
-package com.example.ragabuza.bitcoinmonitor.model
+package com.ragabuza.bitcoinmonitor.model
 
 import java.io.Serializable
 

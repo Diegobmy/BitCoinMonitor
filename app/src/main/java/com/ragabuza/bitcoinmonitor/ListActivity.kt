@@ -1,11 +1,11 @@
-package com.example.ragabuza.bitcoinmonitor
+package com.ragabuza.bitcoinmonitor
 
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.example.ragabuza.bitcoinmonitor.adapter.AlarmAdapter
-import com.example.ragabuza.bitcoinmonitor.dao.AlarmDAO
-import com.example.ragabuza.bitcoinmonitor.util.VibrationManager
+import com.ragabuza.bitcoinmonitor.adapter.AlarmAdapter
+import com.ragabuza.bitcoinmonitor.dao.AlarmDAO
+import com.ragabuza.bitcoinmonitor.util.VibrationManager
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import kotlinx.android.synthetic.main.activity_list.*

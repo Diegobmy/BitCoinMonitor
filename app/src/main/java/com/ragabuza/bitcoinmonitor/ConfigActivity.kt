@@ -1,4 +1,4 @@
-package com.example.ragabuza.bitcoinmonitor
+package com.ragabuza.bitcoinmonitor
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,13 +6,11 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
-import com.example.ragabuza.bitcoinmonitor.dao.AlarmDAO
-import com.example.ragabuza.bitcoinmonitor.util.AlarmHelper
-import com.example.ragabuza.bitcoinmonitor.util.PrefManager
-import com.google.android.gms.ads.AdListener
+import com.ragabuza.bitcoinmonitor.dao.AlarmDAO
+import com.ragabuza.bitcoinmonitor.util.AlarmHelper
+import com.ragabuza.bitcoinmonitor.util.PrefManager
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.activity_config.*
 
 /**
@@ -53,20 +51,50 @@ class ConfigActivity : AppCompatActivity() {
         if(PrefManager(this).getTimeFormat() == "Horas") spNotifyTimer.setSelection(1)
 
         btApply.setOnClickListener {
-            val dao = AlarmDAO(this)
-
-            PrefManager(this).putTime(tvNotifyTimer.text.toString().toInt())
-            PrefManager(this).putTimeFormat(spNotifyTimer.selectedItem.toString())
-
-            AlarmHelper(this).stopAlarm()
-            if(!dao.getAlarm().isEmpty()) AlarmHelper(this).setAlarm()
-
-            dao.close()
-
-            onBackPressed()
+          setConfig()
         }
 
         }
+
+    fun setConfig(){
+        val dao = AlarmDAO(this)
+
+
+        if (tvNotifyTimer.text.toString().isEmpty()) {
+            Toast.makeText(this, "Valor de verificação vazio.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        if (!tvNotifyTimer.text.toString().matches("-?\\d+(\\.\\d+)?".toRegex())) {
+            Toast.makeText(this, "Valor de verificação não numérico.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        if (tvNotifyTimer.text.toString().toFloat() > 59 && spNotifyTimer.selectedItem.toString() == "Minutos") {
+            Toast.makeText(this, "Valor de verificação muito alto.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        if (tvNotifyTimer.text.toString().toFloat() < 3 && spNotifyTimer.selectedItem.toString() == "Minutos") {
+            Toast.makeText(this, "Valor de verificação muito baixo.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        if (tvNotifyTimer.text.toString().toFloat() > 2880 && spNotifyTimer.selectedItem.toString() == "Horas") {
+            Toast.makeText(this, "Valor de verificação muito alto.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        PrefManager(this).putTime(tvNotifyTimer.text.toString().toInt())
+        PrefManager(this).putTimeFormat(spNotifyTimer.selectedItem.toString())
+
+        AlarmHelper(this).stopAlarm()
+        if(!dao.getAlarm().isEmpty()) AlarmHelper(this).setAlarm()
+
+        dao.close()
+
+        onBackPressed()
+    }
 
     fun initFoot(){
         btNotifications.setOnClickListener {

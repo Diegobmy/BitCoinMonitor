@@ -1,9 +1,8 @@
-package com.example.ragabuza.bitcoinmonitor.util
+package com.ragabuza.bitcoinmonitor.util
 
-import android.app.Notification
-import com.example.ragabuza.bitcoinmonitor.model.Alarm
-import com.example.ragabuza.bitcoinmonitor.model.AlarmType
-import com.example.ragabuza.bitcoinmonitor.model.Condition
+import com.ragabuza.bitcoinmonitor.model.Alarm
+import com.ragabuza.bitcoinmonitor.model.AlarmType
+import com.ragabuza.bitcoinmonitor.model.Condition
 
 /**
  * Created by diego.moyses on 12/12/2017.
@@ -30,12 +29,10 @@ class AlarmInterpreter(val alarm: Alarm, val value: Float?) {
         if (value!=null) {
             if (alarm.condition == Condition.GREATER && alarm.value <= value) {
                 message = "$name \n   Alarme: Maior que R\$ ${alarm.value} \n   Valor Atual: R$ $value"
-                message = message.substring(0,message.length - 2)
                 return true
             }
             if (alarm.condition == Condition.LESSER && alarm.value >= value) {
                 message = "$name \n Alarme: Menor que ${alarm.value} \n Valor Atual: $value"
-                message = message.substring(0,message.length - 2)
                 return true
             }
         }

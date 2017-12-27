@@ -1,12 +1,12 @@
-package com.example.ragabuza.bitcoinmonitor
+package com.ragabuza.bitcoinmonitor
 
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.example.ragabuza.bitcoinmonitor.dao.AlarmDAO
-import com.example.ragabuza.bitcoinmonitor.model.Providers
-import com.example.ragabuza.bitcoinmonitor.model.ProvidersList
+import com.ragabuza.bitcoinmonitor.dao.AlarmDAO
+import com.ragabuza.bitcoinmonitor.model.Providers
+import com.ragabuza.bitcoinmonitor.model.ProvidersList
 import com.github.kittinunf.fuel.httpGet
 import kotlinx.android.synthetic.main.activity_trends.*
 import android.text.SpannableString

@@ -1,4 +1,4 @@
-package com.example.ragabuza.bitcoinmonitor.model
+package com.ragabuza.bitcoinmonitor.model
 
 import com.github.kittinunf.fuel.core.ResponseDeserializable
 import com.google.gson.Gson

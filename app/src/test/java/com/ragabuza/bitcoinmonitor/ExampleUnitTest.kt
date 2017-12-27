@@ -1,4 +1,4 @@
-package com.example.ragabuza.bitcoinmonitor
+package com.ragabuza.bitcoinmonitor
 
 import org.junit.Test
 

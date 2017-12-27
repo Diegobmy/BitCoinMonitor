@@ -1,4 +1,4 @@
-package com.example.ragabuza.bitcoinmonitor.util
+package com.ragabuza.bitcoinmonitor.util
 
 import android.app.AlarmManager
 import android.app.PendingIntent
@@ -6,7 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.Context.ALARM_SERVICE
 import android.widget.Toast
-import com.example.ragabuza.bitcoinmonitor.AlarmReceiver
+import com.ragabuza.bitcoinmonitor.AlarmReceiver
 
 
 /**

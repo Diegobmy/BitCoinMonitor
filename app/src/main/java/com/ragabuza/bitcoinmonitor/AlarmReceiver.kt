@@ -1,27 +1,20 @@
-package com.example.ragabuza.bitcoinmonitor
+package com.ragabuza.bitcoinmonitor
 
 import android.app.Notification
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
-import android.content.ClipDescription
 import android.content.Context
 import android.content.Context.NOTIFICATION_SERVICE
 import android.content.Intent
 import android.support.v4.app.NotificationCompat
-import android.widget.Toast
-import com.example.ragabuza.bitcoinmonitor.dao.AlarmDAO
-import com.example.ragabuza.bitcoinmonitor.model.AlarmType
-import com.example.ragabuza.bitcoinmonitor.model.ProvidersList
-import com.example.ragabuza.bitcoinmonitor.util.AlarmHelper
-import com.example.ragabuza.bitcoinmonitor.util.AlarmInterpreter
+import com.ragabuza.bitcoinmonitor.dao.AlarmDAO
+import com.ragabuza.bitcoinmonitor.model.AlarmType
+import com.ragabuza.bitcoinmonitor.model.ProvidersList
+import com.ragabuza.bitcoinmonitor.util.AlarmHelper
+import com.ragabuza.bitcoinmonitor.util.AlarmInterpreter
 import com.github.kittinunf.fuel.httpGet
-import kotlinx.android.synthetic.main.activity_alarm.*
-import android.R.raw
 import android.media.MediaPlayer
-import android.os.Vibrator
-import android.support.v4.content.ContextCompat.startActivity
-import com.example.ragabuza.bitcoinmonitor.util.VibrationManager
 
 
 /**
@@ -81,11 +74,11 @@ class AlarmReceiver : BroadcastReceiver() {
         val mNotificationManager = p0?.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         val mBuilder = NotificationCompat.Builder(p0)
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle("Bitcoin")
+                .setContentTitle("BitAlarme")
                 .setStyle(NotificationCompat.BigTextStyle().bigText(description))
                 .setContentText(description)
                 .setDefaults(type)
-        val intentDestination = Intent(p0, ListActivity::class.java)
+        val intentDestination = Intent(p0, TrendsActivity::class.java)
         val pi = PendingIntent.getActivity(p0, 0, intentDestination, 0)
         mBuilder.setContentIntent(pi)
         val mNotification = mBuilder.build()

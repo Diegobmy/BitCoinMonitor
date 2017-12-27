@@ -21,7 +21,7 @@
     <string name="Condition">Condição:</string>
         <string name="Condition1">Maior que</string>
         <string name="Condition2">Menor que</string>
-    <string name="Provider">Provedor:</string>
+    <string name="Provider">Agência:</string>
     <string name="verTime">Tempo de verificação:</string>
     <string name="notType">Tipo de notificação:</string>
         <string name="Simple">Notificação Simples</string>

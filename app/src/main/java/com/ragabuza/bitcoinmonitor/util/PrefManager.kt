@@ -1,4 +1,4 @@
-package com.example.ragabuza.bitcoinmonitor.util
+package com.ragabuza.bitcoinmonitor.util
 
 import android.content.Context
 import android.content.SharedPreferences

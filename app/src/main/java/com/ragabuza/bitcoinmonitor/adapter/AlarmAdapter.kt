@@ -1,24 +1,20 @@
-package com.example.ragabuza.bitcoinmonitor.adapter
+package com.ragabuza.bitcoinmonitor.adapter
 
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
-import android.support.v4.content.ContextCompat.startActivity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import com.example.ragabuza.bitcoinmonitor.model.Alarm
+import com.ragabuza.bitcoinmonitor.model.Alarm
 import android.view.LayoutInflater
 import android.widget.ImageButton
 import android.widget.ImageView
-import com.example.ragabuza.bitcoinmonitor.R
+import com.ragabuza.bitcoinmonitor.R
 import android.widget.TextView
-import com.example.ragabuza.bitcoinmonitor.AlarmActivity
-import com.example.ragabuza.bitcoinmonitor.AlarmReceiver
-import com.example.ragabuza.bitcoinmonitor.ListActivity
-import com.example.ragabuza.bitcoinmonitor.dao.AlarmDAO
-import com.example.ragabuza.bitcoinmonitor.model.Condition
-import android.widget.Toast
+import com.ragabuza.bitcoinmonitor.AlarmActivity
+import com.ragabuza.bitcoinmonitor.dao.AlarmDAO
+import com.ragabuza.bitcoinmonitor.model.Condition
 import android.content.DialogInterface
 
 
