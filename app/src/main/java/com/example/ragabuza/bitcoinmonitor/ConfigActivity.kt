@@ -5,21 +5,45 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import com.example.ragabuza.bitcoinmonitor.dao.AlarmDAO
 import com.example.ragabuza.bitcoinmonitor.util.AlarmHelper
 import com.example.ragabuza.bitcoinmonitor.util.PrefManager
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.activity_config.*
 
 /**
  * Created by diego.moyses on 12/11/2017.
  */
 class ConfigActivity : AppCompatActivity() {
+
+    lateinit var mAdView : AdView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_config)
         this.supportActionBar!!.title = "Configurações"
+        this.supportActionBar?.setDisplayUseLogoEnabled(true)
+        this.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        this.supportActionBar?.setHomeAsUpIndicator(R.drawable.bitcoin_clock)
 
         initFoot()
+
+        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713")
+        mAdView = findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build()
+        mAdView.loadAd(adRequest)
+
+        mAdView.adListener = object: AdListener() {
+            override fun onAdFailedToLoad(errorCode : Int) {
+                Toast.makeText(this@ConfigActivity, errorCode.toString(), Toast.LENGTH_LONG).show()
+            }
+        }
 
         tvNotifyTimer.setText(PrefManager(this).getTime().toString())
 

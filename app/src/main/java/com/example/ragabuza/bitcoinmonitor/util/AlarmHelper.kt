@@ -21,7 +21,7 @@ class AlarmHelper(private val context: Context?) {
     fun setAlarm(){
         val time = PrefManager(context).getTime()!!.toLong() * 1000 * 60 * if(PrefManager(context).getTimeFormat() == "Horas") 60 else 1
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 5000, time, pendingIntent)
-        Toast.makeText(context, "Alarmes criados.", Toast.LENGTH_LONG).show()
+        Toast.makeText(context, "Alarme acionado.", Toast.LENGTH_LONG).show()
     }
 
     fun stopAlarm(){

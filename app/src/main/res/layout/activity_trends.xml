@@ -10,53 +10,109 @@
         android:orientation="vertical">
     <TextView
         android:drawableLeft="@drawable/ic_empty"
-        android:layout_marginBottom="12dp"
+        android:drawablePadding="12dp"
+        android:layout_marginVertical="6dp"
         android:textSize="10pt"
         android:id="@+id/FOX"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:id="@+id/FOXLine"
+        android:background="#666666"
+        android:visibility="gone"/>
     <TextView
         android:drawableLeft="@drawable/ic_empty"
-        android:layout_marginBottom="12dp"
+        android:drawablePadding="12dp"
+        android:layout_marginVertical="6dp"
         android:textSize="10pt"
         android:id="@+id/MBT"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:id="@+id/MBTLine"
+            android:background="#666666"
+            android:visibility="gone"/>
     <TextView
         android:drawableLeft="@drawable/ic_empty"
-        android:layout_marginBottom="12dp"
+        android:drawablePadding="12dp"
+        android:layout_marginVertical="6dp"
         android:textSize="10pt"
         android:id="@+id/NEG"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:id="@+id/NEGLine"
+            android:background="#666666"
+            android:visibility="gone"/>
     <TextView
         android:drawableLeft="@drawable/ic_empty"
-        android:layout_marginBottom="12dp"
+        android:drawablePadding="12dp"
+        android:layout_marginVertical="6dp"
         android:textSize="10pt"
         android:id="@+id/B2U"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:id="@+id/B2ULine"
+            android:background="#666666"
+            android:visibility="gone"/>
     <TextView
         android:drawableLeft="@drawable/ic_empty"
-        android:layout_marginBottom="12dp"
+        android:drawablePadding="12dp"
+        android:layout_marginVertical="6dp"
         android:textSize="10pt"
         android:id="@+id/BTD"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:id="@+id/BTDLine"
+            android:background="#666666"
+            android:visibility="gone"/>
     <TextView
         android:drawableLeft="@drawable/ic_empty"
-        android:layout_marginBottom="12dp"
+        android:drawablePadding="12dp"
+        android:layout_marginVertical="6dp"
         android:textSize="10pt"
         android:id="@+id/FLW"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:id="@+id/FLWLine"
+            android:background="#666666"
+            android:visibility="gone"/>
     <TextView
         android:drawableLeft="@drawable/ic_empty"
-        android:layout_marginBottom="12dp"
+        android:drawablePadding="12dp"
+        android:layout_marginVertical="6dp"
         android:textSize="10pt"
         android:id="@+id/ARN"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:id="@+id/ARNLine"
+            android:background="#666666"
+            android:visibility="gone"/>
 
     </LinearLayout>
 

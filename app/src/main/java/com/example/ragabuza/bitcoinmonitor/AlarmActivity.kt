@@ -1,6 +1,7 @@
 package com.example.ragabuza.bitcoinmonitor
 
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -21,6 +22,9 @@ class AlarmActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_alarm)
         this.supportActionBar!!.title = "Nova notificação"
+        this.supportActionBar?.setDisplayUseLogoEnabled(true)
+        this.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        this.supportActionBar?.setHomeAsUpIndicator(R.drawable.bitcoin_clock)
         initSpinners()
 
         val editAlarm: Alarm? = intent.getSerializableExtra("alarm") as Alarm?
@@ -37,8 +41,13 @@ class AlarmActivity : AppCompatActivity() {
         }
 
         btPutValue.setOnClickListener {
+            val progress = ProgressDialog(this)
+            progress.setTitle("Carregando")
+            progress.setMessage("Carregando dados.")
+            progress.setCancelable(false)
+            progress.show()
             var providerValue: Float? = 0f
-            "https://api.bitvalor.com/v1/order_book_stats.json".httpGet().responseObject(ProvidersList.Deserializer()){ request, response, result ->
+            "https://api.bitvalor.com/v1/order_book_stats.json".httpGet().timeout(5000).responseObject(ProvidersList.Deserializer()){ request, response, result ->
                 val (providersResult, err) = result
                 when(spProvider.selectedItemPosition){
                     0 -> providerValue = providersResult?.FOX?.ask
@@ -55,7 +64,7 @@ class AlarmActivity : AppCompatActivity() {
                 Toast.makeText(this, text[0], Toast.LENGTH_LONG).show()
 
                 etValue.setText(text[0])
-
+                progress.dismiss()
             }
         }
 
@@ -115,7 +124,7 @@ class AlarmActivity : AppCompatActivity() {
             return
         }
 
-        if (etValue.text.toString().toLong() > 999999) {
+        if (etValue.text.toString().toFloat() > 999999) {
             Toast.makeText(this, "Valor de trading muito alto.", Toast.LENGTH_LONG).show()
             return
         }
@@ -127,7 +136,7 @@ class AlarmActivity : AppCompatActivity() {
         if(dao.getAlarm().isEmpty()) AlarmHelper(this).setAlarm()
         val alarm: Alarm = Alarm(
                 id,
-                etValue.text.toString().toLong(),
+                etValue.text.toString().toFloat(),
                 Condition.values()[spCondition.selectedItemPosition],
                 Providers.values()[spProvider.selectedItemPosition],
                 AlarmType.values()[spNotifyType.selectedItemPosition])

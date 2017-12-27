@@ -82,6 +82,7 @@ class AlarmReceiver : BroadcastReceiver() {
         val mBuilder = NotificationCompat.Builder(p0)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle("Bitcoin")
+                .setStyle(NotificationCompat.BigTextStyle().bigText(description))
                 .setContentText(description)
                 .setDefaults(type)
         val intentDestination = Intent(p0, ListActivity::class.java)

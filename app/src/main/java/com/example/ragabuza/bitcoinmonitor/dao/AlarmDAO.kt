@@ -14,7 +14,7 @@ class AlarmDAO(context: Context?) : SQLiteOpenHelper(context, "Alarm", null, 1) 
 
     override fun onCreate(db: SQLiteDatabase) {
         val sql = "CREATE TABLE Alarm (id INTEGER PRIMARY KEY, " +
-                "value INTEGER NOT NULL, " +
+                "value REAL NOT NULL, " +
                 "condition INTEGER, " +
                 "provider INTEGER, " +
                 "type INTEGER);"
@@ -60,7 +60,7 @@ class AlarmDAO(context: Context?) : SQLiteOpenHelper(context, "Alarm", null, 1) 
         while (c.moveToNext()) {
             val alarm = Alarm(
             c.getLong(c.getColumnIndex("id")),
-            c.getLong(c.getColumnIndex("value")),
+            c.getFloat(c.getColumnIndex("value")),
             Condition.values()[c.getInt(c.getColumnIndex("condition"))],
             Providers.values()[c.getInt(c.getColumnIndex("provider"))],
             AlarmType.values()[c.getInt(c.getColumnIndex("type"))])

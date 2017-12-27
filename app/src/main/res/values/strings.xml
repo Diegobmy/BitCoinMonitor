@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BitCoinMonitor</string>
+    <string name="app_name">Alarme Bitcoin</string>
 
     <string name="Minute">Minuto</string>
     <string name="Hour">Hora</string>

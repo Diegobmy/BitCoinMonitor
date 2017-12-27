@@ -27,4 +27,4 @@ enum class AlarmTimes(val value: Int){
 }
 
 
-data class Alarm(val id: Long, val value: Long, val condition: Condition, val provider: Providers, val type: AlarmType) : Serializable
+data class Alarm(val id: Long, val value: Float, val condition: Condition, val provider: Providers, val type: AlarmType) : Serializable
