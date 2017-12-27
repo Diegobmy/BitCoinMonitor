@@ -115,8 +115,7 @@
             android:text="@string/Config"
             android:textSize="5pt"
             android:textColor="@color/colorPrimaryDarker"
-            android:drawableTint="@color/colorPrimaryDarker"
-            android:drawableTop="@drawable/ic_settings"
+            android:drawableTop="@drawable/ic_settings_selected"
             android:background="@null"/>
     </LinearLayout>
     </LinearLayout>

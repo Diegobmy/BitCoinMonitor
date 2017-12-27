@@ -62,8 +62,7 @@
             android:text="@string/Notifications"
             android:textSize="5pt"
             android:textColor="@color/colorPrimaryDarker"
-            android:drawableTint="@color/colorPrimaryDarker"
-            android:drawableTop="@drawable/ic_format_list_bulleted"
+            android:drawableTop="@drawable/ic_format_list_bulleted_selected"
             android:background="@null"/>
         <View
             android:layout_width="1dp"
